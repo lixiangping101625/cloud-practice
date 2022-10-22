@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @HystrixCommand(
-            commandKey = "listFail",//全局唯一的标识符（默认是函数名称list）
+            commandKey = "listFail",//全局唯一的标识符（默认是函数名称listAll）
             groupKey = "list", //全局服务分组。用于组织仪表盘、统计信息。默认是类名
 //            fallbackMethod = "listFail", //同一个类中，public和private都可以
 //            ignoreExceptions = {IllegalArgumentException.class}, //配置例外的情况（列表中的exception不会触发降级）
@@ -60,6 +60,7 @@ public class UserServiceImpl implements UserService {
         throw new RuntimeException("black sheep");
     }
 
+    @HystrixCommand
     @Override
     public String timeout(Integer count) {
         log.info("进入cloud-user-api的timeout方法");
