@@ -41,3 +41,19 @@ mapper:
 pagehelper:
   support-methods-arguments: true
   helper-dialect: mysql
+
+
+###########################
+#####暴露actuator端点
+#####hystrix监控使用
+###########################
+management:
+  security:
+    enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

@@ -3,6 +3,8 @@ package com.hlkj.user.service.impl;
 import com.hlkj.user.mapper.UserMapper;
 import com.hlkj.user.pojo.User;
 import com.hlkj.user.service.UserService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +29,24 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
 
+    @HystrixCommand(
+            commandKey = "listFail",//全局唯一的标识符（默认是函数名称list）
+            groupKey = "list", //全局服务分组。用于组织仪表盘、统计信息。默认是类名
+//            fallbackMethod = "listFail", //同一个类中，public和private都可以
+//            ignoreExceptions = {IllegalArgumentException.class}, //配置例外的情况（列表中的exception不会触发降级）
+            threadPoolKey = "threadPoolA", //线程组(多个服务可以公用一个线程组)
+            threadPoolProperties = {
+                    @HystrixProperty(name = "coreSize", value = "20"),//核心线程数
+                    //size>0, linkedBlockingQueue ->请求等待队列
+                    //默认-1, SynchronousQueue -> 不存储元素的阻塞队列（建议读源码）
+                    @HystrixProperty(name = "maxQueueSize", value = "40"),
+                    // maxQueueSize=-1时无效。队列没有达到maxQueueSize依然拒绝
+                    @HystrixProperty(name = "queueSizeRejectionThreshold", value = "15"),
+                    // 统计窗口（线程池）持续时间
+                    @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "1024"),
+                    // 窗口内桶子的数量
+                    @HystrixProperty(name = "metrics.rollingStats.numBuckets", value = "18")
+            })
     public List<User> listAll() {
         logger.info("查询用户列表");
         return userMapper.list();
