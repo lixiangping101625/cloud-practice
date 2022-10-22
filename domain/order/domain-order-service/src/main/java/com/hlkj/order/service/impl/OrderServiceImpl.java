@@ -5,6 +5,7 @@ import com.hlkj.order.pojo.Order;
 import com.hlkj.order.service.OrderService;
 import com.hlkj.order.vo.OrderVO;
 import com.hlkj.user.pojo.User;
+import com.hlkj.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,13 +31,16 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     private final static Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
-    @Autowired
+    @Resource
     private OrderMapper orderMapper;
 
+//    @Resource
+//    private RestTemplate restTemplate;//发起服务调用 //todo feign章节改为服务接口调用
+//    @Resource
+//    private LoadBalancerClient client;//找寻服务地址 //todo feign章节改为服务接口调用
+    //使用Feign调用，实际注入的是feign框架生成的代理类
     @Resource
-    private RestTemplate restTemplate;//发起服务调用 //todo feign章节改为服务接口调用
-    @Resource
-    private LoadBalancerClient client;//找寻服务地址 //todo feign章节改为服务接口调用
+    private UserService userService;
 
     @Override
     public List<Order> listAll() {
@@ -48,12 +52,14 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderMapper.getDetail(id);
         Long userId = order.getUserId();
 
-        ServiceInstance instance = client.choose("CLOUD-USER-SERVICE");
-        String target = String.format("http://%s:%s/users-api/info?id=%s",
-                instance.getHost(),
-                instance.getPort(),
-                userId);
-        User user = restTemplate.getForObject(target, User.class);
+//        ServiceInstance instance = client.choose("CLOUD-USER-SERVICE");
+//        String target = String.format("http://%s:%s/users-api/info?id=%s",
+//                instance.getHost(),
+//                instance.getPort(),
+//                userId);
+//        User user = restTemplate.getForObject(target, User.class);
+
+        User user = userService.detail(id);
 
         OrderVO orderVO = new OrderVO();
         BeanUtils.copyProperties(order, orderVO);

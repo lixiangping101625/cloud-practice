@@ -1,6 +1,7 @@
 package com.hlkj.user.service;
 
 import com.hlkj.user.pojo.User;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import java.util.List;
  *              将其声明成controller。这些注解也会被继承，避免下游应用调用时
  *              还要配置寻址路径
  */
+@FeignClient("cloud-user-service")
 @RequestMapping("user-api")
 public interface UserService {
 

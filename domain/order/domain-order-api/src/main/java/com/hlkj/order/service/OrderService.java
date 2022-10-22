@@ -2,6 +2,7 @@ package com.hlkj.order.service;
 
 import com.hlkj.order.pojo.Order;
 import com.hlkj.order.vo.OrderVO;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import java.util.List;
  *              将其声明成controller。这些注解也会被继承，避免下游应用调用时
  *              还要配置寻址路径
  */
+@FeignClient("cloud-order-service")
 @RequestMapping("order-api")
 public interface OrderService {
 
