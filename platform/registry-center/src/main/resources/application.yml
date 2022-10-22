@@ -1,0 +1,19 @@
+server:
+  port: 20000
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: dev
+
+
+############################
+############################
+############################
+eureka:
+  instance:
+    #将localhost指向本机
+    hostname: localhost
+  client:
+    fetch-registry: false
+    register-with-eureka: false
