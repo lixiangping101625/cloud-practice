@@ -71,4 +71,9 @@ public class OrderServiceImpl implements OrderService {
         return orderVO;
     }
 
+    @Override
+    public String error() {
+        return userService.error();
+    }
+
 }

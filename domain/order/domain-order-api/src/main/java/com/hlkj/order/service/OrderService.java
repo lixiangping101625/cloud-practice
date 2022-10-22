@@ -25,4 +25,7 @@ public interface OrderService {
 
     @GetMapping("info")
     OrderVO detail(@RequestParam(name = "id",required = true) Long id);
+
+    @GetMapping("/error")
+    String error();
 }

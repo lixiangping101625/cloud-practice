@@ -31,4 +31,9 @@ public class OrderController {
         return UnifyResponse.buildSuccess(orderService.detail(id));
     }
 
+    @GetMapping("/error")
+    public UnifyResponse<String> error(){
+        return UnifyResponse.buildSuccess(orderService.error());
+    }
+
 }

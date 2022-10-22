@@ -1,5 +1,7 @@
 package com.hlkj.order;
 
+import com.hlkj.order.fallback.itemservice.UserFeignClient;
+import com.hlkj.user.service.UserService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +19,10 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableDiscoveryClient
 @MapperScan(basePackages = "com.hlkj.order.mapper")
-@EnableFeignClients(basePackages = {"com.hlkj.user.service"})
+//@EnableFeignClients(basePackages = {"com.hlkj.user.service"})
+@EnableFeignClients(clients = {
+        UserFeignClient.class
+})
 public class OrderApplication {
 
     @Bean
