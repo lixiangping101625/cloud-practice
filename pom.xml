@@ -20,6 +20,11 @@
         <module>domain/user/domain-user-api</module>
         <module>domain/user/domain-user-service</module>
         <module>domain/user/domain-user-web</module>
+        <module>domain/order/domain-order-pojo</module>
+        <module>domain/order/domain-order-mapper</module>
+        <module>domain/order/domain-order-api</module>
+        <module>domain/order/domain-order-service</module>
+        <module>domain/order/domain-order-web</module>
     </modules>
     <packaging>pom</packaging>
 
