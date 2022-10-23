@@ -37,4 +37,9 @@ public class UserFallback implements UserFeignClient {
     public String timeout(Integer count) {
         return null;
     }
+
+    @Override
+    public String login(User user) {
+        return null;
+    }
 }

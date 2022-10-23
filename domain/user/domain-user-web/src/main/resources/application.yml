@@ -107,3 +107,15 @@ hystrix:
 #          # numBuckets: 1
 #          #在过去的timeInMilliseconds毫秒内，如果有500个请求，这里只记录300个
 #          bucketSize: 300
+      # 对指定commandkey降级
+    loginKey:
+      circuitBreaker:
+        # 超过50%错误才开启熔断
+        errorThresholdPercentage: 50
+        # 5个request之后才进行统计
+        requestVolumeThreshold: 2
+      execution:
+        # 线程池隔离方案
+        isolation:
+            # hystrix的timeout超时配置（注意和feign超时的协同：时间短的生效，一般是hystrix长一点。）
+            timeoutInMilliseconds: 10000

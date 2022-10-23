@@ -74,4 +74,13 @@ public class UserServiceImpl implements UserService {
         }
         return "success";
     }
+
+    @HystrixCommand(commandKey = "loginKey", fallbackMethod = "loginDegradation")
+    @Override
+    public String login(User user) {
+        throw new RuntimeException("模拟限流限流");
+    }
+    private String loginDegradation(User user){
+        return "用户名或密码错误（服务内降级）";
+    }
 }
