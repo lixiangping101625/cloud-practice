@@ -27,6 +27,7 @@
         <module>domain/order/domain-order-web</module>
         <module>platform/hystrix/hystrix-turbine</module>
         <module>platform/dashboard/hystrix-dashboard</module>
+        <module>platform/config-server</module>
     </modules>
     <packaging>pom</packaging>
 
