@@ -15,11 +15,11 @@ spring:
           uri: https://github.com/lixiangping101625/config-repo.git
           # 强制拉取资源文件
           force-pull: true
+          # 将配置文件放到接入方服务名称对应的文件夹下
+          search-paths: '{application}'
+          #username:
+          #password:
         default-label: main
-        # 将配置文件放到接入方服务名称对应的文件夹下
-#          search-paths: '{applicaiton}'
-#          username:
-#          password:
 
 ###########################
 #####eureka注册中心配置
