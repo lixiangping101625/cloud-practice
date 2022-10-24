@@ -8,9 +8,11 @@ spring:
     allow-bean-definition-overriding: true
   datasource:
     # 拆分数据源到独立database instance或者schema
-    url: jdbc:mysql://127.0.0.1:3307/cloud-mall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+#    url: jdbc:mysql://127.0.0.1:3307/cloud-mall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+#    password: 123456
     username: root
-    password: 123456
+    url: ${mariadb.url}
+    password: ${mariadb.password}
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
@@ -47,16 +49,17 @@ pagehelper:
 #####暴露actuator端点
 #####hystrix监控使用
 ###########################
-management:
-  security:
-    enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-details: always
+#配置中心github，无招胜有招（启动的时候从GitHub拉取这些属性，属性名称和GitHub配置一样，自动加载到项目中）
+#management:
+#  security:
+#    enabled: true
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#  endpoint:
+#    health:
+#      show-details: always
 
 ###############################
 ###Hystrix超时和熔断
