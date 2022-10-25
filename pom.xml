@@ -30,6 +30,7 @@
         <module>platform/config-server</module>
         <module>bus/config-bus-server</module>
         <module>bus/config-bus-client</module>
+        <module>gateway/gateway-sample</module>
     </modules>
     <packaging>pom</packaging>
 
