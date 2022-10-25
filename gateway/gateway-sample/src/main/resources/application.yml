@@ -10,7 +10,14 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
-
+      # 断言配置
+      routes:
+      - id: yml_path_route
+        uri: lb://CLOUD-ITEM-SERVICE
+        predicates:
+        - Path=/yml/**
+        filters:
+        - StripPrefix=1
 
 ###########################
 #####eureka注册中心配置
