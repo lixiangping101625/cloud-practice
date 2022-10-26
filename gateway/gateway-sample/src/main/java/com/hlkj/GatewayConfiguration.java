@@ -19,6 +19,8 @@ public class GatewayConfiguration {
 
     @Resource
     private TimerFilter timerFilter;
+    @Resource
+    private AuthFilter authFilter;
 
     @Bean
     @Order
@@ -33,6 +35,7 @@ public class GatewayConfiguration {
                             .addResponseHeader("java-param", "gateway-config")
                             // 添加自定义timerFilter
                             .filter(timerFilter)
+                            .filter(authFilter)
                         )
                         //目标地址
                         .uri("lb://CLOUD-ITEM-SERVICE")
