@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
+import java.time.ZonedDateTime;
+
 /**
  * @author Lixiangping
  * @createTime 2022年10月25日 17:44
@@ -29,6 +31,16 @@ public class GatewayConfiguration {
                         //目标地址
                         .uri("lb://CLOUD-ITEM-SERVICE")
                 )
+                .route(
+                        "secKill",
+                        r -> r.path("/seckill/**")
+                                .and().after(ZonedDateTime.now().plusMinutes(1L))//服务启动加载完成往后推迟1分钟生效
+//                                .and().before()
+//                                .and().between()
+                        .filters(f -> f.stripPrefix(1))
+                        //目标地址
+                        .uri("lb://CLOUD-ITEM-SERVICE")
+                    )
                 .build();
     }
 
