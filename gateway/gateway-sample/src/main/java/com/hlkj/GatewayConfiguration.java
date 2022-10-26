@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
+import javax.annotation.Resource;
 import java.time.ZonedDateTime;
 
 /**
@@ -15,6 +16,9 @@ import java.time.ZonedDateTime;
  */
 @Configuration
 public class GatewayConfiguration {
+
+    @Resource
+    private TimerFilter timerFilter;
 
     @Bean
     @Order
@@ -27,6 +31,8 @@ public class GatewayConfiguration {
                         //filter和逻辑相关
                         .filters(f -> f.stripPrefix(1)
                             .addResponseHeader("java-param", "gateway-config")
+                            // 添加自定义timerFilter
+                            .filter(timerFilter)
                         )
                         //目标地址
                         .uri("lb://CLOUD-ITEM-SERVICE")
