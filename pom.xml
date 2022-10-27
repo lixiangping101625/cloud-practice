@@ -32,6 +32,8 @@
         <module>bus/config-bus-server</module>
         <module>bus/config-bus-client</module>
         <module>platform/gateway</module>
+        <module>domain/auth/auth-api</module>
+        <module>domain/auth/auth-service</module>
     </modules>
     <packaging>pom</packaging>
 

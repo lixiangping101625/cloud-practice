@@ -25,7 +25,8 @@ public class RoutesConfiguration {
     @Resource
     @Qualifier("redisLimitItem")
     private RateLimiter redisLimitItem;
-
+    @Resource
+    private AuthFilter authFilter;
     @Bean//千万不要忘了
     @Order
     public RouteLocator routes(RouteLocatorBuilder builder){
@@ -33,6 +34,10 @@ public class RoutesConfiguration {
          * 只对controller配置
          */
         return builder.routes()
+                /** 授权服务controller */
+                .route(r -> r.path("/auth/**")
+                        .uri("lb://PLATFORM-AUTH-SERVICE"))
+
                 /** 商品controller */
                 .route(r -> r.path("/item/**"/*,"/passport/**", "/userInfo/**" */)
                 .filters(f -> f.requestRateLimiter(
@@ -44,11 +49,15 @@ public class RoutesConfiguration {
                 ))
 //                .filters(f -> f.stripPrefix(1))
                 .uri("lb://CLOUD-ITEM-SERVICE"))
+
                 /** 用户controller */
                 .route(r -> r.path("/user/**")
                 .uri("lb://CLOUD-USER-SERVICE"))
+
                 /** 订单controller */
                 .route(r -> r.path("/order/**")
+                        //自定义filter(实现了用户鉴权)
+                        .filters(f -> f.filter(authFilter))
                 .uri("lb://CLOUD-ORDER-SERVICE"))
                 .build();
     }

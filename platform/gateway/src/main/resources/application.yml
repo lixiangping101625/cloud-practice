@@ -7,9 +7,10 @@ spring:
   application:
     name: platform-gateway
   redis:
-    host: localhost
+    host: 120.27.203.113
     port: 6379
-    database: 0
+    database: 10
+    password: yuanban_redis
   main:
     allow-bean-definition-overriding: true
 
