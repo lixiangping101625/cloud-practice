@@ -17,6 +17,23 @@ spring:
 
   cloud:
     gateway:
+      # 全局跨域配置
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            # 返回的资源共享给请求来源
+            allowed-origins:
+            - "http://localhost:8080"
+            - "http://shop.z.mukewang.com:8080"
+            - "http://center.z.mukewang.com"
+            - "*"
+            # 允许携带cookie、authorization之类的认证信息（暴露给前端的页面）
+            allow-credentials: true
+            allow-headers: "*"
+            allow-methods: "*"
+            expose-headers: "*"
+            # 标识Options请求可以在浏览器缓存多长时间
+            max-age: 600
       discovery:
         locator:
           # gateway去配置中心拉取所有已经注册的服务，并且为它创建默认的路由规则
