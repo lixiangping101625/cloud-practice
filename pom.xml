@@ -14,6 +14,7 @@
         <module>common/web-components</module>
         <module>domain/item/domain-item-mapper</module>
         <module>domain/item/domain-item-api</module>
+        <module>domain/item/domain-item-service</module>
         <module>domain/item/domain-item-web</module>
         <module>domain/user/domain-user-pojo</module>
         <module>domain/user/domain-user-mapper</module>
@@ -30,6 +31,7 @@
         <module>platform/config-server</module>
         <module>bus/config-bus-server</module>
         <module>bus/config-bus-client</module>
+        <module>platform/gateway</module>
     </modules>
     <packaging>pom</packaging>
 

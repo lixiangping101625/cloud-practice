@@ -19,10 +19,10 @@
             i.id as id,
             i.title as title,
             i.price as price,
-            i.main_img as mainImg
+            i.main_img as mainImg,
             i.stock as stock
         FROM
-        items i
+        item i
         where i.id = #{id}
     </select>
 

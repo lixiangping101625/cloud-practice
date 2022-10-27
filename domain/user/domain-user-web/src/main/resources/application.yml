@@ -14,7 +14,8 @@ spring:
     url: ${mariadb.url}
     password: ${mariadb.password}
     type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     hikari:
       connection-timeout: 30000
       minimum-idle: 5
