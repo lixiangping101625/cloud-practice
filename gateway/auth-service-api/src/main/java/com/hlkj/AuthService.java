@@ -1,10 +1,7 @@
 package com.hlkj;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Lixiangping
@@ -44,5 +41,11 @@ public interface AuthService {
     @PostMapping("/refresh")
     @ResponseBody
     public AuthResponse refresh(@RequestParam(name = "refresh") String refresh);
+
+    /**
+     * 删除token
+     */
+    @DeleteMapping("/delete")
+    public AuthResponse delete(@RequestBody Account account);
 
 }

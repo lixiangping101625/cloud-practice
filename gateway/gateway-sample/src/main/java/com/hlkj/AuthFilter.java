@@ -44,6 +44,11 @@ public class AuthFilter implements GatewayFilter, Ordered {
             response.setStatusCode(HttpStatus.UNAUTHORIZED);
             return response.setComplete();
         }
+        if (StringUtils.isEmpty(username)) {
+            log.info("username not found");
+            response.setStatusCode(HttpStatus.UNAUTHORIZED);
+            return response.setComplete();
+        }
         AuthResponse response1 = authService.verify(username, token);
         if (response1.getCode() != 1L) {
             log.info("invalid token");

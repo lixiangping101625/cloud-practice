@@ -73,4 +73,20 @@ public class Controller implements AuthService{
                 .build();
     }
 
+    @Override
+    public AuthResponse delete(Account account) {
+        AuthResponse result = new AuthResponse();
+
+        AuthResponse response = verify(account.getRefreshToken(), account.getUsername());
+        if (ResponseCode.SUCCESS.equals(response.getCode())){
+            redisTemplate.delete(account.getRefreshToken());
+            redisTemplate.delete(account.getToken());
+            result.setCode(ResponseCode.SUCCESS);
+        } else
+        {
+            result.setCode(ResponseCode.USER_NOT_FOUND);
+        }
+        return result;
+    }
+
 }
