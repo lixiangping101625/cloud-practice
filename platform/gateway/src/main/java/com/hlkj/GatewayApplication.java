@@ -14,8 +14,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
-//@EnableFeignClients(basePackages = "com.hlkj")或
-@EnableFeignClients(basePackageClasses = AuthService.class)
+@EnableFeignClients(basePackages = "com.hlkj")
 public class GatewayApplication {
 
     public static void main(String[] args) {

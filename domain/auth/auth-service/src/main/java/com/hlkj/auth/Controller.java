@@ -23,8 +23,9 @@ public class Controller implements AuthService{
     private RedisTemplate redisTemplate;
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestParam String username,
-                              @RequestParam String password){
+    @ResponseBody
+    public AuthResponse login(@RequestParam(name = "username") String username,
+                              @RequestParam(name = "password") String password){
         Account account = Account.builder()
                 .username(username)
                 .build();
@@ -42,7 +43,8 @@ public class Controller implements AuthService{
                 .build();
     }
 
-    @PostMapping("/refresh")
+    @PostMapping("refresh")
+    @ResponseBody
     public AuthResponse refresh(@RequestParam String refreshToken){
         Account account = (Account) redisTemplate.opsForValue().get(refreshToken);
         if (account == null) {
@@ -68,9 +70,10 @@ public class Controller implements AuthService{
      * @param username
      * @return
      */
-    @GetMapping("/verify")
-    public AuthResponse verify(@RequestParam String token,
-                               @RequestParam String username){
+    @GetMapping("verify")
+    @ResponseBody
+    public AuthResponse verify(@RequestParam(name = "username") String username,
+                               @RequestParam(name = "token") String token){
         boolean success = jwtService.verify(token, username);
         return AuthResponse.builder()
                 .code(success ? ResponseCode.SUCCESS:ResponseCode.INVALID_TOKEN)

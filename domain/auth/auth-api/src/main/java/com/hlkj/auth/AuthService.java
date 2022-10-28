@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
  * @createTime 2022年10月26日 11:36
  * @decription:
  */
-//@RequestMapping("auth")
-@FeignClient("auth-service")
+@FeignClient("platform-auth-service")
+@RequestMapping("auth")
 public interface AuthService {
 
     /**
@@ -29,7 +29,7 @@ public interface AuthService {
      * @param token
      * @return
      */
-    @GetMapping("/verify")
+    @GetMapping("verify")
     @ResponseBody
     public AuthResponse verify(@RequestParam(name = "username") String username,
                                @RequestParam(name = "token") String token);
@@ -39,14 +39,14 @@ public interface AuthService {
      * @param refresh
      * @return
      */
-    @PostMapping("/refresh")
+    @PostMapping("refresh")
     @ResponseBody
     public AuthResponse refresh(@RequestParam(name = "refresh") String refresh);
 
     /**
      * 删除token
      */
-    @DeleteMapping("/delete")
+    @DeleteMapping("delete")
     public AuthResponse delete(@RequestBody Account account);
 
 }
