@@ -70,7 +70,7 @@ public class Controller implements AuthService{
      * @param username
      * @return
      */
-    @GetMapping("verify")
+    @GetMapping("/verify")
     @ResponseBody
     public AuthResponse verify(@RequestParam(name = "username") String username,
                                @RequestParam(name = "token") String token){

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
  * @decription:
  */
 @FeignClient("platform-auth-service")
-@RequestMapping("auth")
+@RequestMapping("/auth")
 public interface AuthService {
 
     /**
@@ -29,7 +29,7 @@ public interface AuthService {
      * @param token
      * @return
      */
-    @GetMapping("verify")
+    @GetMapping("/verify")
     @ResponseBody
     public AuthResponse verify(@RequestParam(name = "username") String username,
                                @RequestParam(name = "token") String token);
