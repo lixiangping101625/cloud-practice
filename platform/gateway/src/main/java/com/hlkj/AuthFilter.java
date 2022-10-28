@@ -42,7 +42,12 @@ public class AuthFilter implements GatewayFilter, Ordered {
 
         ServerHttpResponse response = exchange.getResponse();
         if (StringUtils.isEmpty(token)) {
-            log.info("token not found");
+            log.info("header-token not found");
+            response.setStatusCode(HttpStatus.UNAUTHORIZED);
+            return response.setComplete();
+        }
+        if (StringUtils.isEmpty(username)) {
+            log.info("header-username not found");
             response.setStatusCode(HttpStatus.UNAUTHORIZED);
             return response.setComplete();
         }
