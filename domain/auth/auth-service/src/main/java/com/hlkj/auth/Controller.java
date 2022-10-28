@@ -80,6 +80,8 @@ public class Controller implements AuthService{
                 .build();
     }
 
+    @DeleteMapping("/delete")
+    @ResponseBody
     public AuthResponse delete(Account account) {
         AuthResponse result = new AuthResponse();
 

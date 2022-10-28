@@ -39,14 +39,15 @@ public interface AuthService {
      * @param refresh
      * @return
      */
-    @PostMapping("refresh")
+    @PostMapping("/refresh")
     @ResponseBody
     public AuthResponse refresh(@RequestParam(name = "refresh") String refresh);
 
     /**
      * 删除token
      */
-    @DeleteMapping("delete")
+    @DeleteMapping("/delete")
+    @ResponseBody
     public AuthResponse delete(@RequestBody Account account);
 
 }
